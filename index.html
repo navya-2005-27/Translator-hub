@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator Hub - Login and Home</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Login Section Styling */
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e8491d;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #35424a;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .grid-container section {
+            background: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .grid-container section img {
+            width: 80px;
+            height: 80px;
+        }
+
+        /* Footer */
+        footer {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .translator-page {
+            padding: 20px;
+        }
+
+        .output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e9e9e9;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                width: 90%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-section" class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Translator Hub Section -->
+    <div id="translator-hub-section" style="display: none;">
+        <header>
+            <div class="logo">Translator Hub</div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="goToLanguageTranslator()">Language Translator</a></li>
+                    <li><a href="#" onclick="goToSpeechToText()">Speech-to-Text</a></li>
+                    <li><a href="#" onclick="goToAnimalVoice()">Animal Voice</a></li>
+                    <li><a href="#" onclick="goToStoryBook()">Storybook</a></li>
+                    <li><a href="#" onclick="goToImageToText()">Image-to-Text</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Your One-Stop Translator Hub</h1>
+            <h2>Translate languages, speech, animal sounds, stories, and images effortlessly.</h2>
+            <button onclick="startTranslating()">Start Translating</button>
+            <p>Experience the future of translation technology with easy-to-use tools.</p>
+        </section>
+
+        <main>
+            <div class="grid-container">
+                <section>
+                    <img src="language.jpg" alt="Language Icon">
+                    <h3>Language Translator</h3>
+                    <p>Translate between multiple languages with instant accuracy.</p>
+                    <button onclick="goToLanguageTranslator()">Try Now</button>
+                </section>
+
+                <section>
+                    <img src="speech.jpg" alt="Speech Icon">
+                    <h3>Speech-to-Text</h3>
+                    <p>Convert your speech into written text in any language.</p>
+                    <button onclick="goToSpeechToText()">Convert Speech</button>
+                </section>
+
+                <section>
+                    <img src="animal.jpg" alt="Animal Icon">
+                    <h3>Animal Voice Translator</h3>
+                    <p>Decode animal sounds and understand their communication.</p>
+                    <button onclick="goToAnimalVoice()">Translate</button>
+                </section>
+
+                <section>
+                    <img src="storybook.jpg" alt="Storybook Icon">
+                    <h3>Storybook Translator</h3>
+                    <p>Translate your favorite stories into different languages.</p>
+                    <button onclick="goToStoryBook()">Translate Story</button>
+                </section>
+
+                <section>
+                    <img src="image.jpg" alt="Image Icon">
+                    <h3>Image-to-Text</h3>
+                    <p>Extract and translate text from images easily.</p>
+                    <button onclick="goToImageToText()">Extract Text</button>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="#">About</a> | 
+                <a href="#">Privacy</a> | 
+                <a href="#">Terms</a>
+            </div>
+            <p>Email: info@translatorhub.com</p>
+            <p>© 2024 Translator Hub</p>
+        </footer>
+    </div>
+
+    <!-- Language Translator Page -->
+    <div id="language-translator-page" class="translator-page" style="display: none;">
+        <header>
+            <h1>Language Translator</h1>
+            <button onclick="goBack()">Back</button>
+        </header>
+        <main>
+            <label>From:
+                <select id="sourceLanguage">
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                </select>
+            </label>
+            <br><br>
+            <label>To:
+                <select id="targetLanguage">
+                    <option>Spanish</option>
+                    <option>French</option>
+                    <option>German</option>
+                </select>
+            </label>
+            <br><br>
+            <textarea id="inputText" rows="4" placeholder="Enter text here..."></textarea>
+            <br><br>
+            <button onclick="startTranslation()">Translate</button>
+            <h3>Output:</h3>
+            <p id="outputText" class="output"></p>
+        </main>
+    </div>
+
+    <!-- Speech-to-Text Page -->
+    <div id="speech-to-text-page" class="translator-page" style="display: none;">
+        <header>
+            <h1>Speech-to-Text</h1>
+            <button onclick="goBack()">Back</button>
+        </header>
+        <main>
+            <button onclick="convertSpeech()">Start</button>
+            <h3>Output:</h3>
+            <p id="speechOutput" class="output"></p>
+        </main>
+    </div>
+
+    <!-- Animal Voice Translator Page -->
+    <div id="animal-voice-page" class="translator-page" style="display: none;">
+        <header>
+            <h1>Animal Voice</h1>
+            <button onclick="goBack()">Back</button>
+        </header>
+        <main>
+            <select id="animalType">
+                <option value="Dog">Dog</option>
+                <option value="Bird">Bird</option>
+                <option value="Whale">Whale</option>
+            </select>
+            <br><br>
+            <input type="file" id="animalVoiceInput" accept="audio/*">
+            <button onclick="translateAnimalVoice()">Translate</button>
+            <h3>Output:</h3>
+            <p id="animalVoiceOutput" class="output"></p>
+        </main>
+    </div>
+
+    <!-- Storybook Translator Page -->
+    <div id="storybook-page" class="translator-page" style="display: none;">
+        <header>
+            <h1>Storybook Translator</h1>
+            <button onclick="goBack()">Back</button>
+        </header>
+        <main>
+            <input type="file" id="storybookInput" accept="application/pdf">
+            <button onclick="translateStory()">Translate</button>
+            <h3>Output:</h3>
+            <p id="storybookOutput" class="output"></p>
+        </main>
+    </div>
+
+    <!-- Image-to-Text Translator Page -->
+    <div id="image-to-text-page" class="translator-page" style="display: none;">
+        <header>
+            <h1>Image-to-Text</h1>
+            <button onclick="goBack()">Back</button>
+        </header>
+        <main>
+            <input type="file" id="imageInput" accept="image/*">
+            <button onclick="extractText()">Extract</button>
+            <h3>Output:</h3>
+            <p id="extractedTextOutput" class="output"></p>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function validateLogin() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            if (email && password) {
+                document.getElementById("login-section").style.display = "none";
+                document.getElementById("translator-hub-section").style.display = "block";
+                return false;
+            } else {
+                alert("Please enter both email and password.");
+                return false;
+            }
+        }
+
+        function logout() {
+            document.getElementById("translator-hub-section").style.display = "none";
+            document.getElementById("login-section").style.display = "block";
+        }
+
+        function startTranslating() {
+            alert("Welcome to Translator Hub!");
+        }
+
+        function goToLanguageTranslator() {
+            showPage("language-translator-page");
+        }
+
+        function goToSpeechToText() {
+            showPage("speech-to-text-page");
+        }
+
+        function goToAnimalVoice() {
+            showPage("animal-voice-page");
+        }
+
+        function goToStoryBook() {
+            showPage("storybook-page");
+        }
+
+        function goToImageToText() {
+            showPage("image-to-text-page");
+        }
+
+        function showPage(pageId) {
+            document.getElementById("translator-hub-section").style.display = "none";
+            document.getElementById(pageId).style.display = "block";
+        }
+
+        function goBack() {
+            const pages = document.querySelectorAll(".translator-page");
+            pages.forEach(page => page.style.display = "none");
+            document.getElementById("translator-hub-section").style.display = "block";
+        }
+
+        function startTranslation() {
+            const inputText = document.getElementById("inputText").value;
+            document.getElementById("outputText").innerText = `Translated Text: ${inputText.split('').reverse().join('')}`;
+        }
+
+        function convertSpeech() {
+            document.getElementById("speechOutput").innerText = "Speech recognition not implemented.";
+        }
+
+        function translateAnimalVoice() {
+            const type = document.getElementById("animalType").value;
+            const file = document.getElementById("animalVoiceInput").value;
+            document.getElementById("animalVoiceOutput").innerText = `Translated ${type} Sound: ${file}`;
+        }
+
+        function translateStory() {
+            const story = document.getElementById("storybookInput").value;
+            document.getElementById("storybookOutput").innerText = `Translated Story: ${story}`;
+        }
+
+        function extractText() {
+            const image = document.getElementById("imageInput").value;
+            document.getElementById("extractedTextOutput").innerText = `Extracted Text from: ${image}`;
+        }
+    </script>
+</body>
+</html>
